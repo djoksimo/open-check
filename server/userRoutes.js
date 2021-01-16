@@ -143,6 +143,9 @@ router.get("/", async (req, res) => {
       lastName: user.lastName,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
+      isVerified: user.isVerified,
+      associatedAccounts: user.associatedAccounts,
+      trustScore: user.trustScore,
     },
   });
 });
