@@ -49,7 +49,7 @@ ${verificationLink}
       `, // html body
     });
 
-    await StoreUtils.updateUser(email, {
+    await StoreUtils.newUser(email, {
       email,
       firstName,
       lastName,
@@ -113,6 +113,38 @@ router.post("/verify/code", async (req, res) => {
       error: error.toString(),
     });
   }
+});
+
+// return user info
+router.get("/", async (req, res) => {
+  const { email } = req.query;
+
+  if (!email) {
+    return res.status(400).json({ message: "Invalid request, missing email" });
+  }
+
+  let user = {};
+
+  try {
+    const userResponse = await StoreUtils.getUser(email);
+
+    user = JSON.parse(userResponse);
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Something went wrong while fetching account" });
+  }
+
+  return res.status(200).json({
+    message: "Retrieved user data",
+    data: {
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+    },
+  });
 });
 
 module.exports = { userRoutes: router };
