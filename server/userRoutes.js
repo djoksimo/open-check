@@ -118,7 +118,7 @@ router.post("/verify/code", async (req, res) => {
 
 // return user info 
 router.get("/user", async (req, res) => {
-  const { email, password } = req.body;
+  const {email} = req.body;
 
   // from StoreUtils
   return new Promise((resolve, reject) => {
