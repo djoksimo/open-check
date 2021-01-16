@@ -1,0 +1,22 @@
+POST http://localhost:5000/user/register
+Content-Type: application/json
+
+# you can use https://temp-mail.org/ to generate disposable emails with inboxes.
+# replace email with diff email
+
+{
+    "email": "reyogi6846@yutongdt.com",
+    "password": "secret",
+    "firstName": "Waleed",
+    "lastName": "Lazeez"
+}
+
+###
+
+
+# replace email and code accordingly
+POST http://localhost:5000/user/verify/code/?email=reyogi6846@yutongdt.com&code=673852
+Content-Type: application/json
+
+{
+}
