@@ -1,6 +1,7 @@
 import "./App.css";
 import SignUp from "./SignUp.js";
 import SignIn from "./SignIn.js";
+import Account from "./Account.js"
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
@@ -28,7 +29,9 @@ class App extends Component {
       <div className="App">
         <Router>
           <Switch>
-            
+            <Route path="/account">
+              <Account />
+            </Route>
             <Route path="/signin">
               <SignIn />
             </Route>
