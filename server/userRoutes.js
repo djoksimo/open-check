@@ -119,7 +119,7 @@ router.post("/verify/code", async (req, res) => {
   }
 });
 
-// return user info
+// "GET localhost:5000/user" return user info – "My Account"
 router.get("/", async (req, res) => {
   const { email } = req.query;
 
@@ -151,6 +151,48 @@ router.get("/", async (req, res) => {
       associatedAccounts: user.associatedAccounts,
       trustScore: user.trustScore,
     },
+  });
+});
+
+// add a linked account (example: "google", "facebook", etc.)
+
+const allowedAccountTypes = ["google", "facebook"];
+
+router.patch("/link-account", async (req, res) => {
+  const { accountType, email } = req.body;
+
+  if (!email || !accountType) {
+    return res.status(400).json({
+      message: "Invalid request",
+    });
+  }
+
+  // check if valid account type input
+  if (!allowedAccountTypes.includes(accountType)) {
+    return res.status(400).json({
+      message: "Invalid account type",
+    });
+  }
+
+  try {
+    const userResponse = await StoreUtils.getUser(email);
+    const prevUser = JSON.parse(userResponse);
+
+    const newLinkedAccounts = [...prevUser.associatedAccounts, accountType];
+
+    await StoreUtils.updateUser(email, {
+      associatedAccounts: newLinkedAccounts,
+      trustScore: (prevUser.trustScore += 0.1),
+    });
+  } catch (error) {
+    return res.json(500).json({
+      message: "Something went wrong",
+    });
+  }
+
+  return res.status(201).json({
+    message: "Added linked account",
+    code: "AccountAdded",
   });
 });
 

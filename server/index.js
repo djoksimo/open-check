@@ -4,7 +4,7 @@ const express = require("express");
 
 const { userRoutes } = require("./userRoutes");
 const { apiRoutes } = require("./apiRoutes");
-const { developerRoutes } = require("./developerRoutes");
+const { adminRoutes } = require("./adminRoutes");
 
 const { StoreUtils } = require("./StoreUtils");
 const app = express();
@@ -26,9 +26,9 @@ StoreUtils.client.on("connect", () => {
     res.send("<h1>Hello World!</h1>");
   });
 
-  app.use("/api", apiRoutes);
-  app.use("/user", userRoutes);
-  app.use("/dev", developerRoutes);
+  app.use("/api", apiRoutes); // developers adding to their app
+  app.use("/user", userRoutes); // for the actual
+  app.use("/admin", adminRoutes); // admin for the developer to see and manage their users
 
   app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);

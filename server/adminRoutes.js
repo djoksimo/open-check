@@ -9,8 +9,6 @@ router.get("/users", async (_req, res) => {
   try {
     const usersResponse = await StoreUtils.getAllUsers();
 
-    console.log(usersResponse);
-
     users = Object.keys(usersResponse).map((userEmail) => {
       const userStr = usersResponse[userEmail];
       const user = JSON.parse(userStr);
@@ -42,4 +40,4 @@ router.get("/users", async (_req, res) => {
   });
 });
 
-module.exports = { developerRoutes: router };
+module.exports = { adminRoutes: router };

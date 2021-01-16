@@ -16,10 +16,6 @@ const redis = require("redis");
  */
 
 class StoreUtils {
-  constructor() {
-    console.log("hello hi");
-  }
-
   /**
    * @param {Object} newData - New user data: typeof Partial of User Document Model
    *
