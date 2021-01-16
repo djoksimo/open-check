@@ -115,4 +115,23 @@ router.post("/verify/code", async (req, res) => {
   }
 });
 
+
+// return user info 
+router.get("/user", async (req, res) => {
+  const { email, password } = req.body;
+
+  // from StoreUtils
+  return new Promise((resolve, reject) => {
+    StoreUtils.client.HEXISTS(`user:${email}`, "data", (error, response) => {
+      if (error) {
+        console.log(error);
+        reject(error);
+        
+      }
+      console.log(response);
+      resolve(response);
+    });
+  });
+});
+
 module.exports = { userRoutes: router };
