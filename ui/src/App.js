@@ -32,10 +32,10 @@ class App extends Component {
             <Route path="/account">
               <Account />
             </Route>
-            <Route path="/signin">
+            <Route path="/sign-in">
               <SignIn />
             </Route>
-            <Route path="/signup">
+            <Route path="/sign-up">
               <SignUp />
             </Route>
             <Route path="/">

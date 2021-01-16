@@ -13,6 +13,7 @@ import { email, required } from './modules/form/validation';
 import RFTextField from './modules/form/RFTextField';
 import FormButton from './modules/form/FormButton';
 import FormFeedback from './modules/form/FormFeedback';
+import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -44,8 +45,9 @@ function SignUp() {
     return errors;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (values, form, cb) => {
     setSent(true);
+    console.log('hi', values, form,cb);
   };
 
   return (
@@ -57,14 +59,14 @@ function SignUp() {
             Sign Up
           </Typography>
           <Typography variant="body2" align="center">
-            <Link href="/premium-themes/onepirate/sign-in/" underline="always">
+            <Link href="/sign-in/" underline="always">
               Already have an account?
             </Link>
           </Typography>
         </React.Fragment>
-        <Form onSubmit={handleSubmit} subscription={{ submitting: true }} validate={validate}>
-          {({ handleSubmit2, submitting }) => (
-            <form onSubmit={handleSubmit2} className={classes.form} noValidate>
+        <Form  onSubmit={handleSubmit} subscription={{ submitting: true }} validate={validate}>
+          {({ handleSubmit: hs, submitting }) => (
+            <form onSubmit={(e) => { e.preventDefault(); hs();}} className={classes.form} noValidate>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <Field
@@ -122,7 +124,7 @@ function SignUp() {
                 className={classes.button}
                 disabled={submitting || sent}
                 color="secondary"
-                fullWidth
+                fullWidth 
               >
                 {submitting || sent ? 'In progress…' : 'Sign Up'}
               </FormButton>

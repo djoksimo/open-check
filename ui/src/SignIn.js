@@ -43,8 +43,9 @@ function SignIn() {
     return errors;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (values) => {
     setSent(true);
+    console.log(values);
   };
 
   return (
@@ -57,7 +58,7 @@ function SignIn() {
           </Typography>
           <Typography variant="body2" align="center">
             {'Not a member yet? '}
-            <Link href="/premium-themes/onepirate/sign-up/" align="center" underline="always">
+            <Link href="/sign-up/" align="center" underline="always">
               Sign Up here
             </Link>
           </Typography>
