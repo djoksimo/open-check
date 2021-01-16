@@ -1,0 +1,19 @@
+version: "3.3"
+services:
+  web:
+    volumes:
+      - ./:/var/www/app
+    build: "./"
+    command: sh -c 'yarn install && node index.js'
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+    ports:
+      - 3000:3000
+    links:
+      - redis:redis
+    depends_on:
+      - redis
+  redis:
+    container_name: redis-opencheck
+    image: redis:alpine

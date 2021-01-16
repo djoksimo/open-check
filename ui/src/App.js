@@ -1,5 +1,7 @@
-import logo from './logo.svg';
-import './App.css';
+import { Button } from "@material-ui/core";
+
+import logo from "./logo.svg";
+import "./App.css";
 
 function App() {
   return (
@@ -9,6 +11,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
+        <Button color="primary">Hello World</Button>
         <a
           className="App-link"
           href="https://reactjs.org"
