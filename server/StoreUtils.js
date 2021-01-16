@@ -11,6 +11,7 @@ const redis = require("redis");
  * updatedAt: timestamp string
  * trustScore: number
  * associatedAccounts: string[] – string of account provider IDs
+ * idVerified: boolean
  *
  */
 
@@ -29,8 +30,8 @@ class StoreUtils {
       // store user info with key_name: user:email, field: data
       // HSET: https://redis.io/commands/hset
       StoreUtils.client.HSET(
-        `user:${email}`,
-        "data",
+        `user`,
+        email,
         JSON.stringify({
           createdAt: new Date().toString(),
           updatedAt: new Date().toString(),
@@ -60,8 +61,8 @@ class StoreUtils {
       // store user info with key_name: user:email, field: data
       // HSET: https://redis.io/commands/hset
       StoreUtils.client.HSET(
-        `user:${email}`,
-        "data",
+        `user`,
+        email,
         JSON.stringify({
           ...prevUser,
           updatedAt: new Date().toString(),
@@ -83,7 +84,18 @@ class StoreUtils {
    */
   static getUser(email) {
     return new Promise((resolve, reject) => {
-      StoreUtils.client.HGET(`user:${email}`, "data", (error, response) => {
+      StoreUtils.client.HGET(`user`, email, (error, response) => {
+        if (error) {
+          reject(error);
+        }
+        resolve(response);
+      });
+    });
+  }
+
+  static getAllUsers() {
+    return new Promise((resolve, reject) => {
+      StoreUtils.client.HGETALL(`user`, (error, response) => {
         if (error) {
           reject(error);
         }
@@ -103,7 +115,7 @@ class StoreUtils {
    */
   static userExists(email) {
     return new Promise((resolve, reject) => {
-      StoreUtils.client.HEXISTS(`user:${email}`, "data", (error, response) => {
+      StoreUtils.client.HEXISTS(`user`, email, (error, response) => {
         if (error) {
           reject(error);
         }

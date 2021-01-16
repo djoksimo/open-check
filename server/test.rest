@@ -15,8 +15,31 @@ Content-Type: application/json
 
 
 # replace email and code accordingly
-POST http://localhost:5000/user/verify/code/?email=reyogi6846@yutongdt.com&code=673852
+# open https://mailtrap.io/inboxes/1188973/messages/ and copy-paste query string
+POST http://localhost:5000/user/verify/code/?code=712104&email=reyogi6846@yutongdt.com
 Content-Type: application/json
 
 {
 }
+
+
+###
+
+# get single user account for "My Account page"
+
+GET http://localhost:5000/user/?email=reyogi6846@yutongdt.com
+
+
+###
+
+# get all accounts for developer portal
+
+GET http://localhost:5000/dev/users
+
+
+### 
+
+# check email (for "sign in with open-check")
+
+POST http://localhost:5000/api/check/?email=reyogi6846@yutongdt.com
+

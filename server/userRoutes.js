@@ -56,6 +56,9 @@ ${verificationLink}
       password,
       verificationCode,
       isVerified: false,
+      associatedAccounts: [],
+      idVerified: false,
+      trustScore: 0,
     });
     //   todo bonus: salt/encrypt password
   } catch (error) {
@@ -94,6 +97,7 @@ router.post("/verify/code", async (req, res) => {
 
     await StoreUtils.updateUser(email, true, {
       isVerified: true,
+      trustScore: (user.trustScore += 0.1),
     });
 
     return res.status(200).json({

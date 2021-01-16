@@ -3,6 +3,9 @@ const bodyParser = require("body-parser");
 const express = require("express");
 
 const { userRoutes } = require("./userRoutes");
+const { apiRoutes } = require("./apiRoutes");
+const { developerRoutes } = require("./developerRoutes");
+
 const { StoreUtils } = require("./StoreUtils");
 const app = express();
 
@@ -23,7 +26,9 @@ StoreUtils.client.on("connect", () => {
     res.send("<h1>Hello World!</h1>");
   });
 
+  app.use("/api", apiRoutes);
   app.use("/user", userRoutes);
+  app.use("/dev", developerRoutes);
 
   app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
