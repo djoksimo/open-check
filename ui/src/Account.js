@@ -25,6 +25,7 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import AppleIcon from "@material-ui/icons/Apple";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
+import IdentityModal from "./IdentityModal";
 import GoogleIcon from "./images/google-icon.jpg";
 
 import "./account.css";
@@ -359,6 +360,10 @@ function Account() {
               </div>
             </Grid>
           </Grid>
+        </div>
+      
+        <div style={{float: "left",paddingLeft: 6,paddingBottom: 20}}>
+            <IdentityModal/>
         </div>
       </div>
     </div>

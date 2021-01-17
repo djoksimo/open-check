@@ -19,11 +19,13 @@
     "react": "^17.0.1",
     "react-circular-progressbar": "^2.0.3",
     "react-dom": "^17.0.1",
+    "react-dropzone": "^11.2.4",
     "react-final-form": "^6.5.2",
     "react-firebaseui": "^4.1.0",
     "react-move": "^6.4.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "react-webcam": "^5.2.2",
     "validator": "^13.5.2",
     "web-vitals": "^0.2.4"
   },
