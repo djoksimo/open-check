@@ -31,7 +31,7 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import AppleIcon from "@material-ui/icons/Apple";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
-
+import IdentityStepper from "./IdentityStepper"
 import "./account.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -278,6 +278,10 @@ function Account() {
               </div>
             </Grid>
           </Grid>
+        </div>
+      
+        <div>
+            <IdentityStepper/>
         </div>
       </div>
     </div>
