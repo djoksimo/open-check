@@ -98,7 +98,7 @@ router.post("/verify/code", async (req, res) => {
 
     await StoreUtils.updateUser(email, true, {
       isVerified: true,
-      trustScore: (user.trustScore += 0.1),
+      trustScore: (user.trustScore += 50),
     });
 
     return res.status(200).json({
@@ -183,7 +183,7 @@ router.patch("/link-account", async (req, res) => {
 
     await StoreUtils.updateUser(email, {
       associatedAccounts: newLinkedAccounts,
-      trustScore: (prevUser.trustScore += 0.1),
+      trustScore: (prevUser.trustScore += 50),
     });
   } catch (error) {
     return res.json(500).json({
