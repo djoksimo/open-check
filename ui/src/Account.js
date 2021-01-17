@@ -1,8 +1,5 @@
-import withRoot from "./modules/withRoot";
-import googleLogo from "./images/google_logo.png";
-import verifiedIcon from "./images/verified-icon.svg";
-import fbLogo from "./images/facebook_logo.png";
 import React from "react";
+import withRoot from "./modules/withRoot";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
@@ -13,7 +10,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Typography from "@material-ui/core/Typography";
 import AppAppBar from "./modules/views/AppAppBar";
-import Divider from "@material-ui/core/Divider";
 import {
   buildStyles,
   CircularProgressbarWithChildren,
@@ -21,8 +17,6 @@ import {
 import "react-circular-progressbar/dist/styles.css";
 import { easeQuadInOut } from "d3-ease";
 import AnimatedProgressProvider from "./AnimatedProgressProvider";
-import ImageIcon from "@material-ui/icons/Image";
-import WorkIcon from "@material-ui/icons/Work";
 import MailOutline from "@material-ui/icons/MailOutline";
 import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 import EventAvailableIcon from "@material-ui/icons/EventAvailable";
@@ -31,8 +25,13 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import AppleIcon from "@material-ui/icons/Apple";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
+import GoogleIcon from "./images/google-icon.jpg";
 
 import "./account.css";
+import { FirebaseAuth } from "./FirebaseAuth";
+import firebase from "firebase";
+import "firebase/auth";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,8 +68,61 @@ const useStyles = makeStyles((theme) => ({
 function Account() {
   const classes = useStyles();
   const [data, setData] = React.useState({
-    trustScore: 50,
+    trustScore: 0,
+    email: "",
   });
+
+  const [signedInWithGoogle, setSignedInWithGoogle] = React.useState(false);
+
+  React.useEffect(() => {
+    let email = localStorage.getItem("email");
+
+    if (!email) {
+      const url = new URL(window.location.href);
+
+      email = url.searchParams.get("email");
+    }
+
+    const getUser = async () => {
+      if (email) {
+        try {
+          const response = await axios.get(
+            `http://localhost:5000/user/?email=${email}`
+          );
+          console.log(response);
+          setData(response.data.data);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    };
+
+    getUser();
+
+    const linkAccount = async () => {
+      try {
+        if (email) {
+          await axios.patch("http://localhost:5000/user/link-account", {
+            accountType: "google",
+            email: email,
+          });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    const unregisterAuthObserver = firebase
+      .auth()
+      .onAuthStateChanged((user) => {
+        if (!!user) {
+          setSignedInWithGoogle(true);
+
+          linkAccount();
+        }
+      });
+    return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
+  }, []);
 
   let pathColor = "red";
 
@@ -95,7 +147,10 @@ function Account() {
             <div>
               <List>
                 <ListItemAvatar>
-                  <Avatar className={classes.large}>WL</Avatar>
+                  <Avatar className={classes.large}>
+                    {data.firstName ? data.firstName[0] : "U"}
+                    {data.lastName ? data.lastName[0] : "L"}
+                  </Avatar>
                 </ListItemAvatar>
                 <ListItem>
                   <ListItemText
@@ -104,7 +159,11 @@ function Account() {
                       secondary: classes.listItemSecondary,
                     }}
                     primary="Name:"
-                    secondary="Waleed Lazeez"
+                    secondary={
+                      data.firstName
+                        ? `${data.firstName} ${data.lastName}`
+                        : "Unknown"
+                    }
                   ></ListItemText>
                 </ListItem>
                 <ListItem>
@@ -114,7 +173,9 @@ function Account() {
                       secondary: classes.listItemSecondary,
                     }}
                     primary="Email:"
-                    secondary="waleed.lazeez@scena.com"
+                    secondary={
+                      data.email ? data.email : "waleed.lazeez@rizwan.com"
+                    }
                   ></ListItemText>
                 </ListItem>
 
@@ -154,7 +215,7 @@ function Account() {
               >
                 <AnimatedProgressProvider
                   valueStart={0}
-                  valueEnd={50}
+                  valueEnd={data.trustScore}
                   duration={1.4}
                   easingFunction={easeQuadInOut}
                 >
@@ -219,11 +280,22 @@ function Account() {
                       <LinkedInIcon />
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText
-                    primary="Proved LinkedIn identity"
-                    // secondary=
-                  />
+                  <ListItemText primary="Proved LinkedIn identity" />
                 </ListItem>
+                {signedInWithGoogle && (
+                  <ListItem>
+                    <ListItemAvatar>
+                      <Avatar>
+                        <img
+                          style={{ width: 42 }}
+                          src={GoogleIcon}
+                          alt="google"
+                        />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText primary="Proved Google identity" />
+                  </ListItem>
+                )}
               </List>
             </Grid>
           </Grid>
@@ -237,16 +309,21 @@ function Account() {
               </Typography>
               <div style={{ marginLeft: -10 }}>
                 <List>
-                  <ListItem>
-                    <Button
-                      startIcon={<LinkIcon />}
-                      variant="contained"
-                      color="primary"
-                    >
-                      Link Google Account
-                    </Button>
-                    {/* <img className={classes.gimg} src={googleLogo} /> */}
-                  </ListItem>
+                  {!signedInWithGoogle && (
+                    <ListItem>
+                      <Button
+                        startIcon={<LinkIcon />}
+                        variant="contained"
+                        color="primary"
+                      >
+                        Link Google Account
+                      </Button>
+
+                      <FirebaseAuth signedIn={signedInWithGoogle} />
+                      {/* <img className={classes.gimg} src={googleLogo} /> */}
+                    </ListItem>
+                  )}
+
                   <ListItem>
                     <Button
                       startIcon={<FacebookIcon />}
