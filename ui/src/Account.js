@@ -86,7 +86,7 @@ function Account() {
     <div className={classes.root}>
       <AppAppBar title="OpenCheck – My Account" showAuthButtons={false} />
 
-      <div style={{ paddingLeft: 96, paddingRight: 96, paddingTop: 64 }}>
+      <div style={{ paddingLeft: 96, paddingRight: 96, paddingTop: 32 }}>
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
             <Typography variant="h4" align="left">
