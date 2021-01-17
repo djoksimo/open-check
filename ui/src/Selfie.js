@@ -32,7 +32,7 @@ function Selfie(){
             videoConstraints={videoConstraints}
             />
             <br></br>
-            <IconButton onClick={capture} color="primary">
+            <IconButton style={{paddingLeft: 160}} onClick={capture} color="primary">
                 <PhotoCamera />
             </IconButton>
       </div>

@@ -31,7 +31,7 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import AppleIcon from "@material-ui/icons/Apple";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
-import IdentityStepper from "./IdentityStepper"
+import IdentityModal from "./IdentityModal"
 import "./account.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -280,8 +280,8 @@ function Account() {
           </Grid>
         </div>
       
-        <div>
-            <IdentityStepper/>
+        <div style={{float: "left",paddingLeft: 6,paddingBottom: 20}}>
+            <IdentityModal/>
         </div>
       </div>
     </div>
