@@ -4,6 +4,7 @@ import SignIn from "./SignIn.js";
 import Account from "./Account.js"
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Admin from "./Admin.js";
 
 //sets initial state of web page, no image URL 0 entries
 // const initialState = {
@@ -29,6 +30,10 @@ class App extends Component {
       <div className="App">
         <Router>
           <Switch>
+          <Route path="/admin">
+              {/* <div>Admin Route</div> */}
+              <Admin/>
+            </Route> 
             <Route path="/account">
               <Account />
             </Route>
@@ -39,9 +44,9 @@ class App extends Component {
               <SignUp />
             </Route>
             <Route path="/">
-             <div>Peepeepoopoo</div> 
-            </Route>
-
+             <div>/ Route</div> 
+            </Route>       
+                 
           </Switch>
         </Router>
       </div>
