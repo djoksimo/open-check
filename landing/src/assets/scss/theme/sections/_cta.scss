@@ -1,0 +1,29 @@
+.cta {
+
+    .form-input {
+        border-color: transparent;
+        border-radius: 2px;
+    }
+}
+
+.cta-inner {
+	padding-left: 16px;
+	padding-right: 16px;
+    background-color: get-color(primary, 1);
+    background: linear-gradient(100deg, get-color(primary, 1) 0, get-color(secondary, 1) 75%, get-color(tertiary, 1) 100%);
+}
+
+@include media( '>medium' ) {
+
+.cta {
+
+    .form-input {
+        min-width: 280px;
+    }
+}    
+
+	.cta-inner {
+		padding-left: 48px;
+		padding-right: 48px;
+	}
+}

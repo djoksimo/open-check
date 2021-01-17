@@ -1,0 +1,97 @@
+// Colors
+
+// The color palette
+$palette: (
+	light: (
+		1: #F9FAFF,
+		2: #959CB1,
+		3: #6A6F82
+	),
+	dark: (
+		1: #16171B,
+		2: #1C1D22,
+		3: #292B32
+	),
+	primary: (
+		1: #376DF9,
+		2: #6991FA,
+		3: #074AF6,
+		4: #EAF0FF
+ 	),
+	secondary: (
+		1: #FF5FA0,
+		2: #FF92BE,
+		3: #FF2C82,
+		4: #FFE7F1
+    ),
+	tertiary: (
+		1: #FFC55A,
+		2: #FFD78D,
+		3: #FFB327,
+		4: #FFF3DD
+ 	),
+	quaternary: (
+		1: #FF8D74,
+		2: #FFB7A7,
+		3: #FF6341,
+		4: #FFE8E3
+	),    
+	alert: (
+		error: #FF5FA0,
+		warning: #FFC55A,
+		success: #1EC198
+	)
+);
+
+// Base typography: color
+$color: (
+	heading:				get-color(light, 1),
+	base: 					get-color(light, 2),
+	high-contrast: 			get-color(light, 1),
+	mid-contrast: 			get-color(light, 2),
+	low-contrast: 			get-color(light, 3),
+	primary:				get-color(primary, 1),
+	secondary:				get-color(secondary, 1),
+	error:					get-color(alert, error),
+	warning:				get-color(alert, warning),
+	success:				get-color(alert, success),
+	// ↓ Inverted colors
+	heading-inverse:		get-color(dark, 1),
+	base-inverse:			get-color(light, 3),
+	high-contrast-inverse: 	get-color(dark, 1),
+	mid-contrast-inverse: 	get-color(dark, 2),
+	low-contrast-inverse: 	get-color(light, 3)
+);
+
+// Borders and dividers: color
+$border--color: (
+	divider:			get-color(dark, 3),
+	divider-inverse:	darken(get-color(light, 1), 4%)
+);
+
+// Icons: fill color
+$icon--color: (
+	hamburger:				get-color(light, 2),			// hamburger icon
+	accordion:				get-color(primary, 1),			// accordion icon
+	social: 				get-color(primary, 1),			// social icons
+	social-hover: 			get-color(primary, 2),			// social icons (:hover)
+	modal:					get-color(light, 3),			// modal icon
+	modal-hover:			get-color(light, 2),			// modal icon (:hover)
+    news-more:			    get-color(primary, 2),		// news - read more link arrow    
+	// ↓ Inverted colors
+	hamburger-inverse:		get-color(dark, 2),				// hamburger icon
+	accordion-inverse:		null,		                	// accordion icon
+	social-inverse: 		null,							// social icons
+	social-hover-inverse: 	null							// social icons (:hover)
+);
+
+// Misc elements: background color
+$bg--color: (
+	body: 			get-color(dark, 1),
+	body-shadow:	0 20px 48px rgba(get-color(dark, 1), .8),	// body shadow when a boxed layout is used (set to null if don't want a shadow)
+	body-outer:		lighten(get-color(dark, 1), 2%),			// outer bg color when a boxed layout is used
+	bg-color: 		lighten(get-color(light, 1), 9%),			// .has-bg-color helper class
+	shadow: 		0 24px 64px rgba(get-color(dark, 1), .64),	// .has-shadow helper class
+	code: 			darken(get-color(dark, 1), 4%),
+	code-inverse:	darken(get-color(dark, 1), 4%)
+);
