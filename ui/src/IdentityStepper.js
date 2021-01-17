@@ -1,20 +1,19 @@
-import withRoot from './modules/withRoot';
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import StepContent from '@material-ui/core/StepContent';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import Dropzone from 'react-dropzone'
+import withRoot from "./modules/withRoot";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Stepper from "@material-ui/core/Stepper";
+import Step from "@material-ui/core/Step";
+import StepLabel from "@material-ui/core/StepLabel";
+import StepContent from "@material-ui/core/StepContent";
+import Button from "@material-ui/core/Button";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import Dropzone from "react-dropzone";
 import Selfie from "./Selfie";
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: "100%",
   },
   button: {
     marginTop: theme.spacing(1),
@@ -29,31 +28,34 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-    return ['Enable Camera Settings','Take a Selfie', 'Upload Drivers License', 'Confirm Uploads'];
+  return [
+    "Enable Camera Settings",
+    "Take a Selfie",
+    "Upload Drivers License",
+    "Confirm Uploads",
+  ];
 }
 
 function getStepContent(step) {
   switch (step) {
     case 0:
-        return ""
+      return "";
     case 1:
-      return(
-        <Selfie/>
-      );
+      return <Selfie />;
     case 2:
-      return(
-        <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
-        {({getRootProps, getInputProps}) => (
-          <section>
-            <div {...getRootProps()}>
-              <input {...getInputProps()} />
+      return (
+        <Dropzone onDrop={(acceptedFiles) => console.log(acceptedFiles)}>
+          {({ getRootProps, getInputProps }) => (
+            <section>
+              <div {...getRootProps()}>
+                <input {...getInputProps()} />
                 <Button variant="contained" component="span">
-                    Upload
+                  Upload
                 </Button>
-            </div>
-          </section>
-        )}
-      </Dropzone>
+              </div>
+            </section>
+          )}
+        </Dropzone>
       );
     case 3:
       return "";
@@ -62,7 +64,7 @@ function getStepContent(step) {
   }
 }
 
-function IdentityStepper() {
+function IdentityStepper({ onFinish }) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
@@ -99,10 +101,15 @@ function IdentityStepper() {
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={handleNext}
+                    onClick={() => {
+                      if (activeStep + 1 >= steps.length) {
+                        onFinish();
+                      }
+                      handleNext();
+                    }}
                     className={classes.button}
                   >
-                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                    {activeStep === steps.length - 1 ? "Finish" : "Next"}
                   </Button>
                 </div>
               </div>

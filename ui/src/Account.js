@@ -361,9 +361,16 @@ function Account() {
             </Grid>
           </Grid>
         </div>
-      
-        <div style={{float: "left",paddingLeft: 6,paddingBottom: 20}}>
-            <IdentityModal/>
+
+        <div style={{ float: "left", paddingLeft: 6, paddingBottom: 20 }}>
+          <IdentityModal
+            onFinish={() => {
+              setData((prev) => ({
+                ...prev,
+                trustScore: prev.trustScore + 200,
+              }));
+            }}
+          />
         </div>
       </div>
     </div>
