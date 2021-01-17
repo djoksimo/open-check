@@ -5,7 +5,7 @@ Content-Type: application/json
 # replace email with diff email
 
 {
-    "email": "reyogi6846@yutongdt.com",
+    "email": "reyogi68467@yutongdt.com",
     "password": "secret",
     "firstName": "Waleed",
     "lastName": "Lazeez"

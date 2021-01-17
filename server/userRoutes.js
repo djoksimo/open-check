@@ -72,6 +72,7 @@ ${verificationLink}
   //   store verification code associated with email
 
   return res.status(201).json({
+    code: "UserRegistered",
     message: "Temp user registered, verification email sent",
   });
 });

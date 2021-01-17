@@ -1,10 +1,11 @@
 import "./App.css";
 import SignUp from "./SignUp.js";
 import SignIn from "./SignIn.js";
-import Account from "./Account.js"
+import Account from "./Account.js";
 import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Admin from "./Admin.js";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { AuthRedirect } from "./AuthRedirect";
 
 //sets initial state of web page, no image URL 0 entries
 // const initialState = {
@@ -20,11 +21,6 @@ import Admin from "./Admin.js";
 // };
 
 class App extends Component {
-  constructor() {
-    super();
-    // this.state = initialState;
-  }
-
   render() {
     return (
       <div className="App">
@@ -37,19 +33,22 @@ class App extends Component {
             <Route path="/account">
               <Account />
             </Route>
-            <Route path="/signin">
+            <Route path="/sign-in">
               <SignIn />
             </Route>
-            <Route path="/signup">
+            <Route path="/sign-up">
               <SignUp />
             </Route>
+            <Route path="/verify">
+              <AuthRedirect />
+            </Route>
             <Route path="/">
-             <div>/ Route</div> 
-            </Route>       
-                 
+              <div>Home</div>
+            </Route>
           </Switch>
         </Router>
       </div>
     );
   }
-} export default App;
+}
+export default App;

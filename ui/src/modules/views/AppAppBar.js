@@ -1,14 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { withStyles } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar, { styles as toolbarStyles } from '../components/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-
+import React from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar, { styles as toolbarStyles } from "../components/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
 
 const styles = (theme) => ({
   title: {
@@ -16,7 +13,7 @@ const styles = (theme) => ({
   },
   placeholder: toolbarStyles(theme).root,
   toolbar: {
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   left: {
     flex: 1,
@@ -26,8 +23,8 @@ const styles = (theme) => ({
   },
   right: {
     flex: 1,
-    display: 'flex',
-    justifyContent: 'flex-end',
+    display: "flex",
+    justifyContent: "flex-end",
   },
   rightLink: {
     fontSize: 16,
@@ -40,19 +37,24 @@ const styles = (theme) => ({
 });
 
 function AppAppBar(props) {
-  const { classes } = props;
+  const { classes, title, showAuthButtons = true } = props;
 
   return (
     <div>
       <AppBar position="fixed">
-      <Toolbar variant="dense">
-    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-      <MenuIcon />
-    </IconButton>
-    <Typography variant="h6" color="inherit">
-      Open Check
-    </Typography>
-  </Toolbar> 
+        <Toolbar variant="dense">
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" color="inherit">
+            OpenCheck
+          </Typography>
+        </Toolbar>
       </AppBar>
       <div className={classes.placeholder} />
     </div>

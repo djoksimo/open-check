@@ -1,21 +1,21 @@
-import { createMuiTheme } from '@material-ui/core/styles';
-import { green, grey, red } from '@material-ui/core/colors';
+import { createMuiTheme } from "@material-ui/core/styles";
+import { green, grey, red } from "@material-ui/core/colors";
 
 const rawTheme = createMuiTheme({
   palette: {
     primary: {
-      light: '#69696a',
-      main: '#28282a',
-      dark: '#1e1e1f',
+      light: "#69696a",
+      main: "#28282a",
+      dark: "#1e1e1f",
     },
     secondary: {
-      light: '#fff5f8',
-      main: '#ff3366',
-      dark: '#e62958',
+      light: "#fff5f8",
+      main: "#ff3366",
+      dark: "#e62958",
     },
     warning: {
-      main: '#ffc071',
-      dark: '#ffb25e',
+      main: "#ffc071",
+      dark: "#ffb25e",
     },
     error: {
       xLight: red[50],
@@ -27,6 +27,10 @@ const rawTheme = createMuiTheme({
       main: green[500],
       dark: green[700],
     },
+  },
+  listItemText: {
+    color: "red",
+    fontSize: "32px", //Insert your required size
   },
   typography: {
     fontFamily: "'Work Sans', sans-serif",
@@ -42,7 +46,7 @@ const fontHeader = {
   color: rawTheme.palette.text.primary,
   fontWeight: rawTheme.typography.fontWeightMedium,
   fontFamily: rawTheme.typography.fontFamilySecondary,
-  textTransform: 'uppercase',
+  textTransform: "uppercase",
 };
 
 const theme = {
@@ -54,6 +58,9 @@ const theme = {
       default: rawTheme.palette.common.white,
       placeholder: grey[200],
     },
+  },
+  listItemText: {
+    fontSize: "32px", //Insert your required size
   },
   typography: {
     ...rawTheme.typography,
