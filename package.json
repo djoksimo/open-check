@@ -1,8 +1,5 @@
 {
   "devDependencies": {
     "prettier": "^2.2.1"
-  },
-  "dependencies": {
-    "react-move": "^6.4.0"
   }
 }
