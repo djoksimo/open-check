@@ -116,9 +116,13 @@ function Account() {
       .auth()
       .onAuthStateChanged((user) => {
         if (!!user) {
+          if (!localStorage.getItem('"previously-logged-in"')) {
+            linkAccount();
+          }
+          localStorage.setItem("previously-logged-in", "true");
           setSignedInWithGoogle(true);
 
-          linkAccount();
+          console.log(user);
         }
       });
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
@@ -235,7 +239,7 @@ function Account() {
                         <VerifiedUserIcon style={{ fontSize: 48 }} />
                         {/* <img src={VerifiedUserIcon} alt="icon" /> */}
                         <div style={{ fontSize: 24 }}>
-                          <strong>50</strong>
+                          <strong>{data.trustScore}</strong>
                         </div>
                       </CircularProgressbarWithChildren>
                     );
