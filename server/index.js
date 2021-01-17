@@ -21,6 +21,11 @@ StoreUtils.client.on("connect", () => {
   console.log("Connected to redis");
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
+  app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "*");
+    next();
+  });
 
   app.get("/", (_req, res) => {
     res.send("<h1>Hello World!</h1>");

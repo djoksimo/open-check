@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { withStyles } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
-import AppBar from '../components/AppBar';
-import Toolbar, { styles as toolbarStyles } from '../components/Toolbar';
+import React from "react";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import { withStyles } from "@material-ui/core/styles";
+import Link from "@material-ui/core/Link";
+import AppBar from "../components/AppBar";
+import Toolbar, { styles as toolbarStyles } from "../components/Toolbar";
 
 const styles = (theme) => ({
   title: {
@@ -12,7 +12,7 @@ const styles = (theme) => ({
   },
   placeholder: toolbarStyles(theme).root,
   toolbar: {
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   left: {
     flex: 1,
@@ -22,8 +22,8 @@ const styles = (theme) => ({
   },
   right: {
     flex: 1,
-    display: 'flex',
-    justifyContent: 'flex-end',
+    display: "flex",
+    justifyContent: "flex-end",
   },
   rightLink: {
     fontSize: 16,
@@ -36,7 +36,7 @@ const styles = (theme) => ({
 });
 
 function AppAppBar(props) {
-  const { classes } = props;
+  const { classes, title, showAuthButtons = true } = props;
 
   return (
     <div>
@@ -50,26 +50,30 @@ function AppAppBar(props) {
             className={classes.title}
             href="/premium-themes/onepirate/"
           >
-            {'onepirate'}
+            {title || "OpenCheck"}
           </Link>
           <div className={classes.right}>
-            <Link
-              color="inherit"
-              variant="h6"
-              underline="none"
-              className={classes.rightLink}
-              href="/premium-themes/onepirate/sign-in/"
-            >
-              {'Sign In'}
-            </Link>
-            <Link
-              variant="h6"
-              underline="none"
-              className={clsx(classes.rightLink, classes.linkSecondary)}
-              href="/premium-themes/onepirate/sign-up/"
-            >
-              {'Sign Up'}
-            </Link>
+            {showAuthButtons && (
+              <>
+                <Link
+                  color="inherit"
+                  variant="h6"
+                  underline="none"
+                  className={classes.rightLink}
+                  href="/sign-in/"
+                >
+                  {"Sign In"}
+                </Link>
+                <Link
+                  variant="h6"
+                  underline="none"
+                  className={clsx(classes.rightLink, classes.linkSecondary)}
+                  href="/sign-up/"
+                >
+                  {"Sign Up"}
+                </Link>
+              </>
+            )}
           </div>
         </Toolbar>
       </AppBar>
