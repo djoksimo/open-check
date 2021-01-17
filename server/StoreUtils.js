@@ -12,6 +12,7 @@ const redis = require("redis");
  * trustScore: number
  * associatedAccounts: string[] – string of account provider IDs
  * idVerified: boolean
+ * dateOfBirth: timestamp string
  *
  */
 
