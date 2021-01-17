@@ -3,8 +3,6 @@
     "prettier": "^2.2.1"
   },
   "dependencies": {
-    "d3-ease": "^2.0.0",
-    "react-circular-progressbar": "^2.0.3",
     "react-move": "^6.4.0"
   }
 }

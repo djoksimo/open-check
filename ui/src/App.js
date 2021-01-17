@@ -3,6 +3,7 @@ import SignUp from "./SignUp.js";
 import SignIn from "./SignIn.js";
 import Account from "./Account.js";
 import React, { Component } from "react";
+import Admin from "./Admin.js";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { AuthRedirect } from "./AuthRedirect";
 
@@ -25,6 +26,10 @@ class App extends Component {
       <div className="App">
         <Router>
           <Switch>
+          <Route path="/admin">
+              {/* <div>Admin Route</div> */}
+              <Admin/>
+            </Route> 
             <Route path="/account">
               <Account />
             </Route>

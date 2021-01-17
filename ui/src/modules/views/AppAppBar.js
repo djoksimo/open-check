@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import clsx from "clsx";
 import { withStyles } from "@material-ui/core/styles";
-import Link from "@material-ui/core/Link";
-import AppBar from "../components/AppBar";
+import AppBar from "@material-ui/core/AppBar";
 import Toolbar, { styles as toolbarStyles } from "../components/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
 
 const styles = (theme) => ({
   title: {
@@ -41,40 +42,18 @@ function AppAppBar(props) {
   return (
     <div>
       <AppBar position="fixed">
-        <Toolbar className={classes.toolbar}>
-          <div className={classes.left} />
-          <Link
-            variant="h6"
-            underline="none"
+        <Toolbar variant="dense">
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
             color="inherit"
-            className={classes.title}
-            href="/premium-themes/onepirate/"
+            aria-label="menu"
           >
-            {title || "OpenCheck"}
-          </Link>
-          <div className={classes.right}>
-            {showAuthButtons && (
-              <>
-                <Link
-                  color="inherit"
-                  variant="h6"
-                  underline="none"
-                  className={classes.rightLink}
-                  href="/sign-in/"
-                >
-                  {"Sign In"}
-                </Link>
-                <Link
-                  variant="h6"
-                  underline="none"
-                  className={clsx(classes.rightLink, classes.linkSecondary)}
-                  href="/sign-up/"
-                >
-                  {"Sign Up"}
-                </Link>
-              </>
-            )}
-          </div>
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" color="inherit">
+            OpenCheck
+          </Typography>
         </Toolbar>
       </AppBar>
       <div className={classes.placeholder} />
